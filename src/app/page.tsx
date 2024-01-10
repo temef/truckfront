@@ -17,7 +17,7 @@ export default function Home() {
         <ImageUpload></ImageUpload>
       </div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <Button variant="default">Scan</Button>
+        <Button variant="secondary">Scan</Button>
       </div>
     </main>
   );

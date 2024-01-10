@@ -20,7 +20,7 @@ const ImageUpload = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-4 w-full">
       <div className="flex flex-col items-center justify-center gap-2">
         <Input
           type="file"
@@ -29,13 +29,16 @@ const ImageUpload = () => {
           onChange={handleImageChange}
         />
       </div>
-      <div>
+      <div className="w-full mt-4">
         {imagePreview && (
-          <img
-            src={imagePreview}
-            alt="Preview"
-            style={{ maxWidth: "100%", maxHeight: "400px" }}
-          />
+          <div className="w-full flex justify-center">
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="max-w-full max-h-96"
+              //style={{ maxWidth: "100%", maxHeight: "400px" }}
+            />
+          </div>
         )}
       </div>
     </div>
