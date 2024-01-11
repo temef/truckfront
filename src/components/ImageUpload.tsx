@@ -1,10 +1,13 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { AlertDialogComp } from "@/components/AlertDialogComp";
+import React, { useState, useRef } from "react";
 
 const ImageUpload = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [inputKey, setInputKey] = useState(Date.now());
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -19,15 +22,25 @@ const ImageUpload = () => {
     }
   };
 
+  const handleClear = () => {
+    setImagePreview(null);
+    setInputKey(Date.now());
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 w-full">
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-row items-center justify-center gap-2">
         <Input
+          key={inputKey}
           type="file"
           accept="image/*"
           capture="environment" //'user' for front-facing camera
           onChange={handleImageChange}
         />
+        <AlertDialogComp handleEmpty={handleClear} ifEmpty={imagePreview} />
+        {/* <Button variant="secondary" onClick={handleClear}>
+          Clear
+        </Button> */}
       </div>
       <div className="w-full mt-4">
         {imagePreview && (
