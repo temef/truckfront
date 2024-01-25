@@ -3,9 +3,14 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AlertDialogComp } from "@/components/AlertDialogComp";
+import Image from 'next/image'
 import React, { useState, useRef } from "react";
 
-const ImageUpload = () => {
+interface ImageUploadProps {
+  onFileChange: (file: File | null) => void;
+}
+
+const ImageUpload: React.FC<ImageUploadProps> = ({ onFileChange}) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [inputKey, setInputKey] = useState(Date.now());
 
@@ -15,10 +20,12 @@ const ImageUpload = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
+        onFileChange(file);
       };
       reader.readAsDataURL(file);
     } else {
       setImagePreview(null);
+      onFileChange(null)
     }
   };
 
